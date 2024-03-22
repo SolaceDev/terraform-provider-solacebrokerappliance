@@ -16,7 +16,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v3
         with:
-          go-version: "1.21"
+          go-version: "1.22"
 
       - name: Checkout the code
         uses: actions/checkout@v2
@@ -30,36 +30,6 @@ jobs:
             # set next dev version GH env, otherwise set it empty
             echo "NEXT_DEV_VERSION=$(echo ${{ github.ref_name }} | awk -F. -v OFS=. '{$NF += 1 ; print}')" >> $GITHUB_ENV
           fi
-
-      - name: Checkout generator
-        uses: actions/checkout@v4
-        with:
-          repository: SolaceDev/broker-terraform-provider-generator
-          token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT
-          path: broker-terraform-provider-generator
-          ref: "v0.2.0"
-
-      - name: Build and install generator
-        run: |
-          pushd broker-terraform-provider-generator
-          go mod tidy
-          go install .
-          ls ~/go/bin
-          popd
-
-      - name: Generate provider code
-        run: |
-          SWAGGER_SPEC_NAME=`ls ci/swagger_spec`
-          echo "Generating code using spec $SWAGGER_SPEC_NAME"
-          BASE=`pwd`
-          pushd internal/broker/generated
-          rm ./*
-          SEMP_V2_SWAGGER_CONFIG_EXTENDED_JSON="$BASE/ci/swagger_spec/$SWAGGER_SPEC_NAME" ~/go/bin/broker-terraform-provider-generator all
-          popd
-
-      - name: Remove generator source
-        run: |
-          rm -rf broker-terraform-provider-generator
 
       - name: Code format, dependencies, checks
         run: |
