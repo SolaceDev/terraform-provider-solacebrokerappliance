@@ -30,10 +30,10 @@ import (
 func init() {
 	info := broker.EntityInputs{
 		TerraformName:       "dmr_cluster_link",
-		MarkdownDescription: "A Link connects nodes (either within a Cluster or between two different Clusters) and allows them to exchange topology information, subscriptions and data.\n\n\n\nA SEMP client authorized with a minimum access scope/level of \"global/read-only\" is required to perform this operation.\n\nThis has been available since SEMP API version 2.11.",
+		MarkdownDescription: "A Link connects nodes (either within a Cluster or between two different Clusters) and allows them to exchange topology information, subscriptions and data.\n\n\nAttribute|Identifying|Write-Only|Deprecated|Opaque\n:---|:---:|:---:|:---:|:---:\nauthentication_basic_password||x||x\ndmr_cluster_name|x|||\nremote_node_name|x|||\n\n\n\nA SEMP client authorized with a minimum access scope/level of \"global/read-only\" is required to perform this operation.\n\nThis has been available since SEMP API version 2.11.",
 		ObjectType:          broker.StandardObject,
 		PathTemplate:        "/dmrClusters/{dmrClusterName}/links/{remoteNodeName}",
-		Version:             0, // Placeholder: value will be replaced in the provider code
+		Version:             0,
 		Attributes: []*broker.AttributeInfo{
 			{
 				BaseType:            broker.String,
@@ -183,7 +183,7 @@ func init() {
 				BaseType:            broker.Int64,
 				SempName:            "clientProfileQueueGuaranteed1MinMsgBurst",
 				TerraformName:       "client_profile_queue_guaranteed1_min_msg_burst",
-				MarkdownDescription: "The number of messages that are always allowed entry into the \"Guaranteed 1\" (G-1) priority queue, regardless of the `client_profile_queue_guaranteed1_max_depth` value. Changes to this attribute are synchronized to HA mates via config-sync. The default value is `255`.",
+				MarkdownDescription: "The number of messages that are always allowed entry into the \"Guaranteed 1\" (G-3) priority queue, regardless of the `client_profile_queue_guaranteed1_max_depth` value. Changes to this attribute are synchronized to HA mates via config-sync. The default value is `255`.",
 				Type:                types.Int64Type,
 				TerraformType:       tftypes.Number,
 				Converter:           broker.IntegerConverter{},
@@ -271,32 +271,6 @@ func init() {
 				Default: 256,
 			},
 			{
-				BaseType:            broker.Int64,
-				SempName:            "connectionRetryCount",
-				TerraformName:       "connection_retry_count",
-				MarkdownDescription: "The number of retry attempts to establish a connection before moving on to the next remote Message VPN. Changes to this attribute are synchronized to HA mates via config-sync. The default value is `0`. Available since SEMP API version 2.41.",
-				Type:                types.Int64Type,
-				TerraformType:       tftypes.Number,
-				Converter:           broker.IntegerConverter{},
-				Int64Validators: []validator.Int64{
-					int64validator.Between(0, 255),
-				},
-				Default: 0,
-			},
-			{
-				BaseType:            broker.Int64,
-				SempName:            "connectionRetryDelay",
-				TerraformName:       "connection_retry_delay",
-				MarkdownDescription: "The number of seconds the broker waits for the bridge connection to be established before attempting a new connection. Changes to this attribute are synchronized to HA mates via config-sync. The default value is `3`. Available since SEMP API version 2.41.",
-				Type:                types.Int64Type,
-				TerraformType:       tftypes.Number,
-				Converter:           broker.IntegerConverter{},
-				Int64Validators: []validator.Int64{
-					int64validator.Between(0, 255),
-				},
-				Default: 3,
-			},
-			{
 				BaseType:            broker.String,
 				SempName:            "dmrClusterName",
 				TerraformName:       "dmr_cluster_name",
@@ -366,13 +340,13 @@ func init() {
 				BaseType:            broker.Struct,
 				SempName:            "queueEventSpoolUsageThreshold",
 				TerraformName:       "queue_event_spool_usage_threshold",
-				MarkdownDescription: "The thresholds for the message spool usage event of the Queue, relative to `queue_max_msg_spool_usage`.",
+				MarkdownDescription: "",
 				Attributes: []*broker.AttributeInfo{
 					{
 						BaseType:            broker.Int64,
 						SempName:            "clearPercent",
 						TerraformName:       "clear_percent",
-						MarkdownDescription: "The clear threshold for the value of this counter as a percentage of its maximum value. Falling below this value will trigger a corresponding event. This attribute may not be returned in a GET. The default value is: `1`.",
+						MarkdownDescription: "The clear threshold for the value of this counter as a percentage of its maximum value. Falling below this value will trigger a corresponding event. This attribute may not be returned in a GET.",
 						Requires:            []string{"set_percent"},
 						ConflictsWith:       []string{"clear_value", "set_value"},
 						Type:                types.Int64Type,
@@ -415,7 +389,7 @@ func init() {
 						BaseType:            broker.Int64,
 						SempName:            "setPercent",
 						TerraformName:       "set_percent",
-						MarkdownDescription: "The set threshold for the value of this counter as a percentage of its maximum value. Exceeding this value will trigger a corresponding event. This attribute may not be returned in a GET. The default value is: `2`.",
+						MarkdownDescription: "The set threshold for the value of this counter as a percentage of its maximum value. Exceeding this value will trigger a corresponding event. This attribute may not be returned in a GET.",
 						Requires:            []string{"clear_percent"},
 						ConflictsWith:       []string{"clear_value", "set_value"},
 						Type:                types.Int64Type,
