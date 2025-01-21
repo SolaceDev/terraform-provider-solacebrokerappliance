@@ -90,7 +90,7 @@ func init() {
 				BaseType:            broker.String,
 				SempName:            "clientSecret",
 				TerraformName:       "client_secret",
-				MarkdownDescription: "The OAuth client secret. This attribute is absent from a GET and not updated when absent in a PUT, subject to the exceptions [here](https://docs.solace.com/Admin/SEMP/SEMP-API-Archit.htm#HTTP_Methods). Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `\"\"`.",
+				MarkdownDescription: "The OAuth client secret. This attribute is absent from a GET and not updated when absent in a PUT, subject to the exceptions in note 4 (refer to the `Notes` section in the SEMP API `Config reference`). Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `\"\"`.",
 				Sensitive:           true,
 				Type:                types.StringType,
 				TerraformType:       tftypes.String,
@@ -302,19 +302,6 @@ func init() {
 					stringvalidator.OneOf("client", "resource-server"),
 				},
 				Default: "client",
-			},
-			{
-				BaseType:            broker.String,
-				SempName:            "proxyName",
-				TerraformName:       "proxy_name",
-				MarkdownDescription: "The name of the proxy to use for discovery, user info, jwks, and introspection requests. Leave empty for no proxy. Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `\"\"`. Available since SEMP API version 2.41.",
-				Type:                types.StringType,
-				TerraformType:       tftypes.String,
-				Converter:           broker.SimpleConverter[string]{TerraformType: tftypes.String},
-				StringValidators: []validator.String{
-					stringvalidator.LengthBetween(0, 32),
-				},
-				Default: "",
 			},
 			{
 				BaseType:            broker.Bool,
