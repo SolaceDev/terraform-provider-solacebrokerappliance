@@ -43,7 +43,7 @@ The import identifier for this resource is `{msg_vpn_name}/{oauth_profile_name}`
  Available since SEMP API version 2.32.
 - `client_id` (String) The OAuth client id. Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `""`.
 - `client_required_type` (String) The required value for the TYP field in the ID token header. Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `"JWT"`.
-- `client_secret` (String, Sensitive) The OAuth client secret. This attribute is absent from a GET and not updated when absent in a PUT, subject to the exceptions [here](https://docs.solace.com/Admin/SEMP/SEMP-API-Archit.htm#HTTP_Methods). Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `""`.
+- `client_secret` (String, Sensitive) The OAuth client secret. This attribute is absent from a GET and not updated when absent in a PUT, subject to the exceptions in note 4 (refer to the `Notes` section in the SEMP API `Config reference`). Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `""`.
 - `client_validate_type_enabled` (Boolean) Enable or disable verification of the TYP field in the ID token header. Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `true`.
 - `disconnect_on_token_expiration_enabled` (Boolean) Enable or disable the disconnection of clients when their tokens expire. Changing this value does not affect existing clients, only new client connections. Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `true`.
 - `enabled` (Boolean) Enable or disable the OAuth profile. Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `false`.
@@ -63,7 +63,6 @@ The import identifier for this resource is `{msg_vpn_name}/{oauth_profile_name}`
 "client" - The broker is in the OAuth client role.
 "resource-server" - The broker is in the OAuth resource server role.
 </pre>
-- `proxy_name` (String) The name of the proxy to use for discovery, user info, jwks, and introspection requests. Leave empty for no proxy. Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `""`. Available since SEMP API version 2.41.
 - `resource_server_parse_access_token_enabled` (Boolean) Enable or disable parsing of the access token as a JWT. Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `true`.
 - `resource_server_required_audience` (String) The required audience value. Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `""`.
 - `resource_server_required_issuer` (String) The required issuer value. Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `""`.
