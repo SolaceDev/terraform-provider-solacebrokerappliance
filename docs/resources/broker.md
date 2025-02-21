@@ -5,10 +5,9 @@ subcategory: ""
 description: |-
   This resource is not supported in production by Solace in this version, see provider limitations.
   This object contains global configuration for the message broker.
-  A SEMP client authorized with a minimum access scope/level of "vpn/read-only" is required to perform this operation. Requests which include the following attributes may require greater access scope/level than "vpn/read-only":
+  A SEMP client authorized with a minimum access scope/level of "global/none" is required to perform this operation. Requests which include the following attributes require greater access scope/level:
   Attribute|Access Scope/Level
   :---|:---:
-  auth_brute_force_protection_enabled|global/read-only
   auth_client_cert_revocation_check_mode|global/read-only
   config_sync_authentication_client_cert_max_chain_depth|global/read-only
   config_sync_authentication_client_cert_validate_date_enabled|global/read-only
@@ -124,7 +123,12 @@ description: |-
   tls_cipher_suite_secure_shell_list|global/read-only
   tls_crime_exploit_protection_enabled|global/read-only
   tls_server_cert_content|global/read-only
+  tls_standard_domain_certificate_authorities_enabled|vpn/read-only
   tls_ticket_lifetime|global/read-only
+  web_manager_allow_unencrypted_wizards_enabled|vpn/read-only
+  web_manager_customization|vpn/read-only
+  web_manager_redirect_http_enabled|vpn/read-only
+  web_manager_redirect_http_override_tls_port|vpn/read-only
   This has been available since SEMP API version 2.13.
   The import identifier for this resource is "" (empty string)
 ---
@@ -137,12 +141,11 @@ This object contains global configuration for the message broker.
 
 
 
-A SEMP client authorized with a minimum access scope/level of "vpn/read-only" is required to perform this operation. Requests which include the following attributes may require greater access scope/level than "vpn/read-only":
+A SEMP client authorized with a minimum access scope/level of "global/none" is required to perform this operation. Requests which include the following attributes require greater access scope/level:
 
 
 Attribute|Access Scope/Level
 :---|:---:
-auth_brute_force_protection_enabled|global/read-only
 auth_client_cert_revocation_check_mode|global/read-only
 config_sync_authentication_client_cert_max_chain_depth|global/read-only
 config_sync_authentication_client_cert_validate_date_enabled|global/read-only
@@ -258,7 +261,12 @@ tls_cipher_suite_msg_backbone_list|global/read-only
 tls_cipher_suite_secure_shell_list|global/read-only
 tls_crime_exploit_protection_enabled|global/read-only
 tls_server_cert_content|global/read-only
+tls_standard_domain_certificate_authorities_enabled|vpn/read-only
 tls_ticket_lifetime|global/read-only
+web_manager_allow_unencrypted_wizards_enabled|vpn/read-only
+web_manager_customization|vpn/read-only
+web_manager_redirect_http_enabled|vpn/read-only
+web_manager_redirect_http_override_tls_port|vpn/read-only
 
 
 
@@ -273,7 +281,6 @@ The import identifier for this resource is `""` (empty string)
 
 ### Optional
 
-- `auth_brute_force_protection_enabled` (Boolean) Enable or disable protection against brute force password guessing attacks on local management accounts. Changes to this attribute are synchronized to HA mates via config-sync. The default value is `false`. Available since SEMP API version 2.40.
 - `auth_client_cert_revocation_check_mode` (String) The client certificate revocation checking mode used when a client authenticates with a client certificate. Changes to this attribute are synchronized to HA mates via config-sync. The default value is `"none"`. The allowed values and their meaning are:
 
 <pre>
@@ -373,8 +380,8 @@ The import identifier for this resource is `""` (empty string)
 - `tls_cipher_suite_msg_backbone_list` (String) The colon-separated list of cipher suites used for TLS data connections (e.g. client pub/sub). The value "default" implies all supported suites ordered from most secure to least secure. Changes to this attribute are synchronized to HA mates via config-sync. The default value is `"default"`.
 - `tls_cipher_suite_secure_shell_list` (String) The colon-separated list of cipher suites used for TLS secure shell connections (e.g. SSH, SFTP, SCP). The value "default" implies all supported suites ordered from most secure to least secure. Changes to this attribute are synchronized to HA mates via config-sync. The default value is `"default"`.
 - `tls_crime_exploit_protection_enabled` (Boolean) Enable or disable protection against the CRIME exploit. When enabled, TLS+compressed messaging performance is degraded. This protection should only be disabled if sufficient ACL and authentication features are being employed such that a potential attacker does not have sufficient access to trigger the exploit. Changes to this attribute are synchronized to HA mates via config-sync. The default value is `true`.
-- `tls_server_cert_content` (String, Sensitive) The PEM formatted content for the server certificate used for TLS connections. It must consist of a private key and between one and three certificates comprising the certificate trust chain. This attribute is absent from a GET and not updated when absent in a PUT, subject to the exceptions [here](https://docs.solace.com/Admin/SEMP/SEMP-API-Archit.htm#HTTP_Methods). The default value is `""`.
-- `tls_server_cert_password` (String, Sensitive) The password for the server certificate used for TLS connections. This attribute is absent from a GET and not updated when absent in a PUT, subject to the exceptions [here](https://docs.solace.com/Admin/SEMP/SEMP-API-Archit.htm#HTTP_Methods). The default value is `""`.
+- `tls_server_cert_content` (String, Sensitive) The PEM formatted content for the server certificate used for TLS connections. It must consist of a private key and between one and three certificates comprising the certificate trust chain. This attribute is absent from a GET and not updated when absent in a PUT, subject to the exceptions in note 4 (refer to the `Notes` section in the SEMP API `Config reference`). The default value is `""`.
+- `tls_server_cert_password` (String, Sensitive) The password for the server certificate used for TLS connections. This attribute is absent from a GET and not updated when absent in a PUT, subject to the exceptions in note 4 (refer to the `Notes` section in the SEMP API `Config reference`). The default value is `""`.
 - `tls_standard_domain_certificate_authorities_enabled` (Boolean) Enable or disable the standard domain certificate authority list. The default value is `true`. Available since SEMP API version 2.19.
 - `tls_ticket_lifetime` (Number) The TLS ticket lifetime in seconds. When a client connects with TLS, a session with a session ticket is created using the TLS ticket lifetime which determines how long the client has to resume the session. Changes to this attribute are synchronized to HA mates via config-sync. The default value is `86400`.
 - `web_manager_allow_unencrypted_wizards_enabled` (Boolean) Enable or disable the use of unencrypted wizards in the Web-based Manager UI. This setting should be left at its default on all production systems or other systems that need to be secure.  Enabling this option will permit the broker to forward plain-text data to other brokers, making important information or credentials available for snooping. Changes to this attribute are synchronized to HA mates via config-sync. The default value is `false`. Available since SEMP API version 2.28.
