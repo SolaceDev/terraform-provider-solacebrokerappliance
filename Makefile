@@ -60,4 +60,5 @@ generate-code: ## Generate latest code from SEMP API spec
 	ls ~/go/bin | grep broker-terraform-code-generator
 	@cd internal/broker/generated; \
 	rm ./*; \
-	SEMP_V2_SWAGGER_CONFIG_EXTENDED_JSON="../../../ci/swagger_spec/$(shell ls ci/swagger_spec)" ~/go/bin/broker-terraform-code-generator appliance-provider all;
+	SEMP_V2_SWAGGER_CONFIG_EXTENDED_JSON="../../../ci/swagger_spec/$(shell ls ci/swagger_spec)" ~/go/bin/broker-terraform-code-generator appliance-provider all
+	@rm -rf broker-terraform-code-generator
