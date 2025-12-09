@@ -10,10 +10,13 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.24"
+          go-version: "1.25"
 
       - name: Check out code
         uses: actions/checkout@v4
+
+      - name: Set GOTOOLCHAIN for covdata fix
+        run: go env -w GOTOOLCHAIN=go1.25.0+auto
 
       - name: Set up Terraform latest
         uses: hashicorp/setup-terraform@v2
