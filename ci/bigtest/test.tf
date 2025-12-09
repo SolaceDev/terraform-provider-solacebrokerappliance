@@ -9,12 +9,14 @@ terraform {
 provider "solacebroker" {
   username       = "admin"
   password       = "admin"
-  url            = "http://localhost:8080"
-  skip_api_check = true
+  # url            = "http://localhost:8080"
+  # skip_api_check = true
+  url            = "http://lab-128-33:80"
 }
 
 resource "solacebroker_broker" "broker" {
   auth_client_cert_revocation_check_mode                               = "ocsp"
+  auth_required_access_level_gather_diagnostics                        = "global-admin"
   config_sync_authentication_client_cert_max_chain_depth               = 4
   config_sync_authentication_client_cert_validate_date_enabled         = false
   config_sync_client_profile_tcp_initial_congestion_window             = 3
@@ -28,7 +30,7 @@ resource "solacebroker_broker" "broker" {
   config_sync_tls_enabled                                              = true
   guaranteed_msging_defragmentation_schedule_day_list                  = "Mon,Tue"
   guaranteed_msging_defragmentation_schedule_enabled                   = true
-  guaranteed_msging_defragmentation_schedule_time_list                 = "23:59"
+  guaranteed_msging_defragmentation_schedule_time_list                 = "22:59"
   guaranteed_msging_defragmentation_threshold_enabled                  = true
   guaranteed_msging_defragmentation_threshold_fragmentation_percentage = 30
   guaranteed_msging_defragmentation_threshold_min_interval             = 16
@@ -176,6 +178,7 @@ resource "solacebroker_dmr_cluster_link" "dmr_cluster_link" {
   queue_max_delivered_unacked_msgs_per_flow      = 100000
   queue_max_msg_spool_usage                      = 700000
   queue_max_redelivery_count                     = 1
+  queue_respect_dmq_eligible_enabled             = true
   queue_max_ttl                                  = 1
   queue_reject_msg_to_sender_on_discard_behavior = "never"
   queue_respect_ttl_enabled                      = true
@@ -205,6 +208,7 @@ resource "solacebroker_domain_cert_authority" "domain_cert_authority" {
 resource "solacebroker_msg_vpn" "msg_vpn" {
   msg_vpn_name                                                   = "test"
   alias                                                          = "test123"
+  allow_dmq_eligible_endpoint_override_enabled                   = true
   authentication_basic_enabled                                   = false
   authentication_basic_profile_name                              = ""
   authentication_basic_radius_domain                             = "test"
@@ -710,6 +714,7 @@ resource "solacebroker_msg_vpn_mqtt_session" "msg_vpn_mqtt_session" {
   queue_reject_low_priority_msg_enabled               = true
   queue_reject_low_priority_msg_limit                 = 1
   queue_reject_msg_to_sender_on_discard_behavior      = "always"
+  queue_respect_dmq_eligible_enabled                  = true
   queue_respect_ttl_enabled                           = true
 }
 
@@ -886,7 +891,7 @@ resource "solacebroker_msg_vpn_rest_delivery_point_rest_consumer" "msg_vpn_rest_
   authentication_scheme                            = "oauth-jwt"
   enabled                                          = false
   http_method                                      = "put"
-  local_interface                                  = "test"
+  local_interface                                  = ""
   max_post_wait_time                               = 29
   outgoing_connection_count                        = 4
   proxy_name                                       = "test"
