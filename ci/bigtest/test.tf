@@ -9,9 +9,8 @@ terraform {
 provider "solacebroker" {
   username       = "admin"
   password       = "admin"
-  # url            = "http://localhost:8080"
-  # skip_api_check = true
-  url            = "http://lab-128-33:80"
+  url            = "http://localhost:8080"
+  skip_api_check = true
 }
 
 resource "solacebroker_broker" "broker" {
