@@ -4,7 +4,7 @@ page_title: "solacebroker_msg_vpn_cert_matching_rule_condition Data Source - sol
 subcategory: ""
 description: |-
   A Cert Matching Rule Condition compares data extracted from a certificate to a username attribute or an expression.
-  The minimum access scope/level required to perform this operation is "vpn/read-only".
+  A SEMP client authorized with a minimum access scope/level of "vpn/read-only" is required to perform this operation.
   This has been available since SEMP API version 2.27.
 ---
 
@@ -14,7 +14,7 @@ A Cert Matching Rule Condition compares data extracted from a certificate to a u
 
 
 
-The minimum access scope/level required to perform this operation is "vpn/read-only".
+A SEMP client authorized with a minimum access scope/level of "vpn/read-only" is required to perform this operation.
 
 This has been available since SEMP API version 2.27.
 
@@ -26,14 +26,8 @@ This has been available since SEMP API version 2.27.
 ### Required
 
 - `msg_vpn_name` (String) The name of the Message VPN.
-
-The minimum access scope/level required to retrieve this attribute is "vpn/read-only".
 - `rule_name` (String) The name of the rule.
-
-The minimum access scope/level required to retrieve this attribute is "vpn/read-only".
-- `source` (String) Certificate field to be compared with the Attribute.
-
-The minimum access scope/level required to retrieve this attribute is "vpn/read-only". The allowed values and their meaning are:
+- `source` (String) Certificate field to be compared with the Attribute. The allowed values and their meaning are:
 
 <pre>
 "certificate-thumbprint" - The attribute is computed as the SHA-1 hash over the entire DER-encoded contents of the client certificate.
@@ -53,9 +47,5 @@ The minimum access scope/level required to retrieve this attribute is "vpn/read-
 
 ### Read-Only
 
-- `attribute` (String) Client Username Attribute to be compared with certificate content. Either an attribute or an expression must be provided on creation, but not both.
-
-The minimum access scope/level required to retrieve this attribute is "vpn/read-only". The default value is `""`.
-- `expression` (String) Glob expression to be matched with certificate content. Either an expression or an attribute must be provided on creation, but not both.
-
-The minimum access scope/level required to retrieve this attribute is "vpn/read-only". The default value is `""`.
+- `attribute` (String) Client Username Attribute to be compared with certificate content. Either an attribute or an expression must be provided on creation, but not both. The default value is `""`.
+- `expression` (String) Glob expression to be matched with certificate content. Either an expression or an attribute must be provided on creation, but not both. The default value is `""`.
