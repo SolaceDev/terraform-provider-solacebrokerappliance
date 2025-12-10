@@ -1,16 +1,16 @@
-# Terraform Provider for Solace PubSub+ Event Broker Appliance
+# Terraform Provider for Solace Event Broker Appliance
 [![Actions Status](https://github.com/SolaceProducts/terraform-provider-solacebrokerappliance/actions/workflows/core-pipeline-main-branch-only.yml/badge.svg?branch=main)](https://github.com/SolaceProducts/terraform-provider-solacebrokerappliance/actions?query=workflow:%22Test+Provider%22+branch:main)
 [![Go Report Card](https://goreportcard.com/badge/github.com/solaceproducts/terraform-provider-solacebrokerappliance)](https://goreportcard.com/report/github.com/solaceproducts/terraform-provider-solacebrokerappliance)
 
-This provider, maintained by Solace, is a plugin for Terraform that enables you to configure PubSub+ Event Broker Appliances.
+This provider, maintained by Solace, is a plugin for Terraform that enables you to configure Solace Event Broker Appliances.
 
 The provider is available from the [Terraform Providers Registry](https://registry.terraform.io/providers/solaceproducts/solacebrokerappliance/latest).
 
-The minimum required PubSub+ Event Broker Appliance version is 10.4.
+The minimum required Solace Event Broker Appliance version is 10.4.
 
 ## Quick Start
 
-1. Ensure you have admin access to a Solace PubSub+ Event Broker Appliance.
+1. Ensure you have admin access to a Solace Event Broker Appliance.
 2. Install the [Terraform CLI](https://www.terraform.io/downloads)
 3. Create the [`examples/sampleconfig.tf`](examples/sampleconfig.tf) sample file in a new directory, adjust the `url`, and the management credential parameters `username` and `password` to your broker's setup.
 4. From this directory run `terraform plan`, then `terraform apply` (if prompted, `terraform init` may also be required).
