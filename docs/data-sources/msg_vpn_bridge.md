@@ -59,6 +59,7 @@ The minimum access scope/level required to retrieve this attribute is "vpn/read-
 <pre>
 "basic" - Basic Authentication Scheme (via username and password).
 "client-certificate" - Client Certificate Authentication Scheme (via certificate file or content).
+"tls-psk" - This authentication scheme is used internally by the broker. It cannot be directly configured by a user.
 </pre>
 - `remote_connection_retry_count` (Number) The number of retry attempts to establish a connection before moving on to the next remote Message VPN.
 
