@@ -84,7 +84,7 @@ The following issues may arise while using the generator.
 
 | Error           | SOLACEBROKER_xxx is mandatory but not available                                    |
 |-----------------|------------------------------------------------------------------------------------|
-| Explanation     | This indicates that a mandatory parameter which is required to connect to the PubSub+ appliance is missing.   |
+| Explanation     | This indicates that a mandatory parameter which is required to connect to the Solace appliance is missing.   |
 | Possible Action | Verify that all [mandatory parameters](#supported-options) are correctly set.       |
 
 | Error           | Error: Too many provider specific identifiers. Required identifiers: [{xxx}] |
@@ -95,7 +95,7 @@ The following issues may arise while using the generator.
 | Error           | SEMP called failed. resource not found on path /xxx/xxx                                  |
 |-----------------|------------------------------------------------------------------------------------------|
 | Explanation     | This indicates the resource attributes attempted to be fetched could not be read.          |
-| Possible Action | Ensure identifiers values are consistent as set on the PubSub+ appliance configured with.   |
+| Possible Action | Ensure identifiers values are consistent as set on the Solace appliance configured with.   |
 
 | Error           | Error: Broker resource not found by terraform name xxx                                                     |
 |-----------------|------------------------------------------------------------------------------------------------------------|

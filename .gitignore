@@ -12,3 +12,5 @@ __debug*
 bin
 dist
 vendor
+reports
+CLAUDE.md

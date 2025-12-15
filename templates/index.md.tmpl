@@ -1,14 +1,14 @@
 ---
 page_title: "Provider: solacebrokerappliance"
 description: |-
-  A provider for a Solace PubSub+ Event Broker Appliance.  
+  A provider for a Solace Event Broker Appliance.  
 ---
 
-# Solace PubSub+ Event Broker Appliance (solacebrokerappliance) Provider
+# Solace Event Broker Appliance (solacebrokerappliance) Provider
 
-This provider specifically supports the configuration of Solace PubSub+ Appliances. The provider for the Solace Software Event Broker (solacebroker) is available from [here](https://registry.terraform.io/providers/solaceproducts/solacebroker/latest).
+This provider specifically supports the configuration of Solace Appliances. The provider for the Solace Software Event Broker (solacebroker) is available from [here](https://registry.terraform.io/providers/solaceproducts/solacebroker/latest).
 
-The [Solace PubSub+ Platform](https://solace.com/products/platform/)'s [PubSub+ Event Broker Appliance](https://solace.com/products/event-broker/appliance/)
+The [Solace Platform](https://solace.com/products/platform/)'s [Solace Event Broker Appliance](https://solace.com/products/event-broker/appliance/)
 efficiently streams event-driven information between applications, IoT devices and user interfaces running in cloud, on-premises, and hybrid environments 
 using open APIs and protocols like AMQP, JMS, MQTT, REST and WebSocket.
 
@@ -17,7 +17,7 @@ to dynamically share events across the distributed enterprise.
 
 ## Overview
 
-The _solacebrokerappliance_ provider enables you to configure a PubSub+ Event Broker Appliance using Terraform.
+The _solacebrokerappliance_ provider enables you to configure a Solace Event Broker Appliance using Terraform.
 
 -> This _solacebrokerappliance_ provider uses the same [preferred local name](https://developer.hashicorp.com/terraform/language/providers/requirements#local-names) `"solacebroker"` as 
 the [_solacebroker_ provider](https://registry.terraform.io/providers/solaceproducts/solacebrokerappliance/latest).
@@ -29,11 +29,11 @@ Use the navigation to the left for more information in the guides and for the av
 
 ## Limitations
 
-> This version of the PubSub+ Terraform provider is generally available for production services contained within a Message VPN.  Use of any resource not contained within a Message VPN is not supported in production by Solace.
+> This version of the Solace Terraform provider is generally available for production services contained within a Message VPN.  Use of any resource not contained within a Message VPN is not supported in production by Solace.
 
 ## Minimum appliance version
 
-The minimum required PubSub+ Event Broker Appliance version is 10.4.
+The minimum required Solace Event Broker Appliance version is 10.4.
 
 ## Example Usage
 
