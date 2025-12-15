@@ -90,9 +90,12 @@ The minimum access scope/level required to retrieve this attribute is "global/re
 - `client_profile_tcp_max_segment_size` (Number) The TCP maximum segment size, in bytes. Changes are applied to all existing connections.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/mesh-manager". Changes to this attribute are synchronized to HA mates via config-sync. The default value is `1460`.
-- `client_profile_tcp_max_window_size` (Number) The TCP maximum window size, in kilobytes. Changes are applied to all existing connections. This setting is ignored on the software broker.
+- `client_profile_tcp_max_window_size` (Number) The TCP maximum window size, in kilobytes. Changes are applied to all existing connections.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/mesh-manager". Changes to this attribute are synchronized to HA mates via config-sync. The default value is `256`.
+- `client_profile_tcp_slow_start_after_idle_enabled` (Boolean) Enable or disable whether TCP should revert to slow-start after an idle period, as recommended by RFC 5681 s4.1. Changes are applied to all existing connections.
+
+The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/mesh-manager". Changes to this attribute are synchronized to HA mates via config-sync. The default value is `true`. Available since SEMP API version 2.48.
 - `connection_retry_count` (Number) The number of retry attempts to establish a connection before moving on to the next remote Message VPN.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/mesh-manager". Changes to this attribute are synchronized to HA mates via config-sync. The default value is `0`. Available since SEMP API version 2.41.

@@ -58,7 +58,7 @@ The minimum access scope/level required to retrieve this attribute is "vpn/read-
 "radius" - RADIUS authentication. A RADIUS profile name must be provided.
 "none" - No authentication. Anonymous login allowed.
 </pre>
-- `authentication_client_cert_allow_api_provided_username_enabled` (Boolean) Enable or disable allowing an incoming client connection to specify a Client Username via the API connect method. When disabled, the certificate CN (Common Name) is always used.
+- `authentication_client_cert_allow_api_provided_username_enabled` (Boolean) Enable or disable allowing an incoming client connection to specify a Client Username via the API connect method. When disabled, the system will use the configured username source settings to determine which client username will be used.
 
 The minimum access scope/level required to retrieve this attribute is "vpn/read-only". The minimum access scope/level required to change this attribute is "global/mesh-manager". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `false`.
 - `authentication_client_cert_certificate_matching_rules_enabled` (Boolean) Enable or disable certificate matching rules. When disabled, any valid certificate is accepted.

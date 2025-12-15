@@ -19,7 +19,7 @@ package generated
 import "terraform-provider-solacebroker/internal/broker"
 
 const BasePath = "/SEMP/v2/config"
-const SempVersion = "2.46"
+const SempVersion = "2.48"
 const Platform = "Appliance"
 
 func init() {
