@@ -41,15 +41,24 @@ The minimum access scope/level required to retrieve this attribute is "global/re
 "crl" - Use Certificate Revocation Lists (CRL) for certificate revocation checking.
 "ocsp-crl" - Use OCSP first, but if OCSP fails to return an unambiguous result, then check via CRL.
 </pre>
-- `config_sync_authentication_client_cert_max_chain_depth` (Number) The maximum depth for a client certificate chain. The depth of a chain is defined as the number of signing CA certificates that are present in the chain back to a trusted self-signed root CA certificate.
+- `auth_required_access_level_gather_diagnostics` (String) The access level required to generate encrypted gather-diagnostics output, which can only be decrypted by Solace support. global/admin is always required to generate unencrypted gather-diagnostics output. Gather-diagnostics output may contain sensitive information.
 
-The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `3`. Available since SEMP API version 2.22.
-- `config_sync_authentication_client_cert_validate_date_enabled` (Boolean) Enable or disable validation of the "Not Before" and "Not After" validity dates in the authentication certificate(s).
+The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/admin". Changes to this attribute are synchronized to HA mates via config-sync. The default value is `"global-read-only"`. The allowed values and their meaning are:
 
-The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `true`. Available since SEMP API version 2.22.
+<pre>
+"global-read-only" - Generating encrypted gather-diagnostics output requires global/read-only.
+"global-admin" - Generating encrypted gather-diagnostics output requires global/admin.
+</pre>
+ Available since SEMP API version 2.48.
+- `config_sync_authentication_client_cert_max_chain_depth` (Number, Deprecated) The maximum depth for a client certificate chain. The depth of a chain is defined as the number of signing CA certificates that are present in the chain back to a trusted self-signed root CA certificate.
+
+The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `3`. Deprecated since SEMP API version 2.48. Client certificate authentication is deprecated for config-sync.
+- `config_sync_authentication_client_cert_validate_date_enabled` (Boolean, Deprecated) Enable or disable validation of the "Not Before" and "Not After" validity dates in the authentication certificate(s).
+
+The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `true`. Deprecated since SEMP API version 2.48. Client certificate authentication is deprecated for config-sync.
 - `config_sync_client_profile_tcp_initial_congestion_window` (Number) The TCP initial congestion window size for Config Sync clients, in multiples of the TCP Maximum Segment Size (MSS). Changing the value from its default of 2 results in non-compliance with RFC 2581. Contact support before changing this value.
 
-The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `2`. Available since SEMP API version 2.22.
+The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `2`. Available since SEMP API version 2.51.
 - `config_sync_client_profile_tcp_keepalive_count` (Number) The number of TCP keepalive retransmissions to a client using the Client Profile before declaring that it is not available.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `5`. Available since SEMP API version 2.22.
@@ -59,12 +68,15 @@ The minimum access scope/level required to retrieve this attribute is "global/re
 - `config_sync_client_profile_tcp_keepalive_interval` (Number) The amount of time between TCP keepalive retransmissions to a client using the Client Profile when no acknowledgment is received, in seconds.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `1`. Available since SEMP API version 2.22.
-- `config_sync_client_profile_tcp_max_window` (Number) The TCP maximum window size for clients using the Client Profile, in kilobytes. Changes are applied to all existing connections. This setting is ignored on the software broker.
+- `config_sync_client_profile_tcp_max_window` (Number) The TCP maximum window size for clients using the Client Profile, in kilobytes. Changes are applied to all existing connections.
 
-The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `256`. Available since SEMP API version 2.22.
+The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `256`. Available since SEMP API version 2.51.
 - `config_sync_client_profile_tcp_mss` (Number) The TCP maximum segment size for clients using the Client Profile, in bytes. Changes are applied to all existing connections.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `1460`. Available since SEMP API version 2.22.
+- `config_sync_client_profile_tcp_slow_start_after_idle_enabled` (Boolean) Enable or disable whether TCP should revert to slow-start after an idle period, as recommended by RFC 5681 s4.1. Changes are applied to all existing connections.
+
+The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `true`. Available since SEMP API version 2.51.
 - `config_sync_enabled` (Boolean) Enable or disable configuration synchronization for High Availability or Disaster Recovery.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `false`. Available since SEMP API version 2.22.
@@ -97,7 +109,7 @@ The minimum access scope/level required to retrieve this attribute is "global/re
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". Changes to this attribute are synchronized to HA mates via config-sync. The default value is `50`. Available since SEMP API version 2.25.
 - `guaranteed_msging_disk_array_wwn` (String) The WWN number to use when accessing a LUN on an external disk array.
 
-The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `""`. Available since SEMP API version 2.18.
+The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `""`. Available since SEMP API version 2.51.
 - `guaranteed_msging_disk_location` (String) The disk location for the the guaranteed message spool (required for high availability with guaranteed messaging). When external is chosen the guaranteed message spool is stored on an external disk array attached to the router. If internal storage is currently used, changing to external causes message spooling on the router to stop and messages spooled on the internal storage to be deleted. If internal is chosen the guaranteed message spool is stored on an external disk array attached to the router. If internal storage is currently used, changing to external causes message spooling on the router to stop and messages spooled on the internal storage to be deleted.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". Modifying this attribute while the object (or the relevant part of the object) is administratively enabled may be service impacting as guaranteed_msging_enabled will be temporarily set to false to apply the change. The default value is `"external"`. The allowed values and their meaning are:
@@ -106,7 +118,7 @@ The minimum access scope/level required to retrieve this attribute is "global/re
 "external" - The guaranteed message spool is stored on an external disk array attached to the appliance.
 "internal" - The guaranteed message spool is stored internally on the appliance.
 </pre>
- Available since SEMP API version 2.18.
+ Available since SEMP API version 2.51.
 - `guaranteed_msging_enabled` (Boolean) Enable or disable Guaranteed Messaging.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `false`. Available since SEMP API version 2.18.
@@ -145,7 +157,7 @@ The minimum access scope/level required to retrieve this attribute is "global/re
 "primary" - The primary virtual router.
 "backup" - The backup virtual router.
 </pre>
- Available since SEMP API version 2.18.
+ Available since SEMP API version 2.51.
 - `oauth_profile_default` (String) The default OAuth profile for OAuth authenticated SEMP requests.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/admin". Changes to this attribute are synchronized to HA mates via config-sync. The default value is `""`. Available since SEMP API version 2.24.
@@ -228,19 +240,19 @@ The minimum access scope/level required to retrieve this attribute is "global/re
 - `service_web_transport_web_url_suffix` (String) Used to specify the Web URL suffix that will be used by Web clients when communicating with the broker.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". Modifying this attribute while the object (or the relevant part of the object) is administratively enabled may be service impacting as service_web_transport_enabled will be temporarily set to false to apply the change. The default value is `""`. Available since SEMP API version 2.17.
-- `tls_block_version10_enabled` (Boolean) Enable or disable the blocking of incoming TLS version 1.0 connections. When blocked, existing TLS 1.0 connections from Clients and SEMP users remain connected while new connections are blocked. Note that support for TLS 1.0 will eventually be discontinued, at which time TLS 1.0 connections will be blocked regardless of this setting.
+- `tls_block_version10_enabled` (Boolean, Deprecated) Enable or disable the blocking of incoming TLS version 1.0 connections. When blocked, existing TLS 1.0 connections from Clients and SEMP users remain connected while new connections are blocked. Note that support for TLS 1.0 will eventually be discontinued, at which time TLS 1.0 connections will be blocked regardless of this setting.
 
-The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". Changes to this attribute are synchronized to HA mates via config-sync. The default value is `true`.
+The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". The default value is `true`. Deprecated since SEMP API version 2.48. TLS 1.0 is no longer supported.
 - `tls_block_version11_enabled` (Boolean) Enable or disable the blocking of TLS version 1.1 connections. When blocked, all existing incoming and outgoing TLS 1.1 connections with Clients, SEMP users, and LDAP servers remain connected while new connections are blocked. Note that support for TLS 1.1 will eventually be discontinued, at which time TLS 1.1 connections will be blocked regardless of this setting.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". Changes to this attribute are synchronized to HA mates via config-sync. The default value is `false`.
-- `tls_cipher_suite_management_list` (String) The colon-separated list of cipher suites used for TLS management connections (e.g. SEMP, LDAP). The value "default" implies all supported suites ordered from most secure to least secure.
+- `tls_cipher_suite_management_list` (String) The colon-separated list of cipher suites used for TLS management connections (e.g. SEMP, LDAP) when using TLS 1.2 and lower. The value "default" implies all supported suites ordered from most secure to least secure.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". Changes to this attribute are synchronized to HA mates via config-sync. The default value is `"default"`.
-- `tls_cipher_suite_msg_backbone_list` (String) The colon-separated list of cipher suites used for TLS data connections (e.g. client pub/sub). The value "default" implies all supported suites ordered from most secure to least secure.
+- `tls_cipher_suite_msg_backbone_list` (String) The colon-separated list of cipher suites used for TLS data connections (e.g. client pub/sub) when using TLS 1.2 and lower. The value "default" implies all supported suites ordered from most secure to least secure.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/mesh-manager". Changes to this attribute are synchronized to HA mates via config-sync. The default value is `"default"`.
-- `tls_cipher_suite_secure_shell_list` (String) The colon-separated list of cipher suites used for TLS secure shell connections (e.g. SSH, SFTP, SCP). The value "default" implies all supported suites ordered from most secure to least secure.
+- `tls_cipher_suite_secure_shell_list` (String) The colon-separated list of cipher suites used for secure shell connections (e.g. SSH, SFTP, SCP). The value "default" implies all supported suites ordered from most secure to least secure.
 
 The minimum access scope/level required to retrieve this attribute is "global/read-only". The minimum access scope/level required to change this attribute is "global/read-write". Changes to this attribute are synchronized to HA mates via config-sync. The default value is `"default"`.
 - `tls_crime_exploit_protection_enabled` (Boolean) Enable or disable protection against the CRIME exploit. When enabled, TLS+compressed messaging performance is degraded. This protection should only be disabled if sufficient ACL and authentication features are being employed such that a potential attacker does not have sufficient access to trigger the exploit.
