@@ -16,4 +16,4 @@
 
 package main
 
-const version = "1.2.0-b10.4.1.428"
+const version = "1.2.0-b10.4.1.429"
