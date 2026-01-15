@@ -1,6 +1,6 @@
 // terraform-provider-solacebroker
 //
-// Copyright 2025 Solace Corporation. All rights reserved.
+// Copyright 2026 Solace Corporation. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -399,7 +399,7 @@ func init() {
 				BaseType:            broker.Int64,
 				SempName:            "receiverTcpCongestionWindowSize",
 				TerraformName:       "receiver_tcp_congestion_window_size",
-				MarkdownDescription: "The TCP initial congestion window size for clients using the Client Profile, in multiples of the TCP Maximum Segment Size (MSS). Changing the value from its default of 2 results in non-compliance with RFC 2581. Contact support before changing this value.\n\nThe minimum access scope/level required to retrieve this attribute is \"vpn/read-only\". The minimum access scope/level required to change this attribute is \"vpn/read-write\". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `2`.",
+				MarkdownDescription: "The TCP initial congestion window size for clients using the Client Profile, in multiples of the TCP Maximum Segment Size (MSS). Changing the value from its default of 2 results in non-compliance with RFC 2581. Contact support before changing this value.\n\nThe minimum access scope/level required to retrieve this attribute is \"vpn/read-only\". The minimum access scope/level required to change this attribute is \"vpn/read-write\". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `2`. Available since SEMP API version 2.52.",
 				Type:                types.Int64Type,
 				TerraformType:       tftypes.Number,
 				Converter:           broker.IntegerConverter{},
@@ -464,7 +464,7 @@ func init() {
 				BaseType:            broker.Int64,
 				SempName:            "receiverTcpMaxWindowSize",
 				TerraformName:       "receiver_tcp_max_window_size",
-				MarkdownDescription: "The TCP maximum window size for clients using the Client Profile, in kilobytes. Changes are applied to all existing connections. This setting is ignored on the software broker.\n\nThe minimum access scope/level required to retrieve this attribute is \"vpn/read-only\". The minimum access scope/level required to change this attribute is \"vpn/read-write\". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `256`.",
+				MarkdownDescription: "The TCP maximum window size for clients using the Client Profile, in kilobytes. Changes are applied to all existing connections.\n\nThe minimum access scope/level required to retrieve this attribute is \"vpn/read-only\". The minimum access scope/level required to change this attribute is \"vpn/read-write\". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `256`. Available since SEMP API version 2.52.",
 				Type:                types.Int64Type,
 				TerraformType:       tftypes.Number,
 				Converter:           broker.IntegerConverter{},
@@ -472,6 +472,16 @@ func init() {
 					int64validator.Between(16, 65536),
 				},
 				Default: 256,
+			},
+			{
+				BaseType:            broker.Bool,
+				SempName:            "receiverTcpSlowStartAfterIdleEnabled",
+				TerraformName:       "receiver_tcp_slow_start_after_idle_enabled",
+				MarkdownDescription: "Enable or disable whether TCP should revert to slow-start after an idle period, as recommended by RFC 5681 s4.1. Changes are applied to all existing connections.\n\nThe minimum access scope/level required to retrieve this attribute is \"vpn/read-only\". The minimum access scope/level required to change this attribute is \"vpn/read-write\". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `true`. Available since SEMP API version 2.52.",
+				Type:                types.BoolType,
+				TerraformType:       tftypes.Bool,
+				Converter:           broker.SimpleConverter[bool]{TerraformType: tftypes.Bool},
+				Default:             true,
 			},
 			{
 				BaseType:            broker.String,

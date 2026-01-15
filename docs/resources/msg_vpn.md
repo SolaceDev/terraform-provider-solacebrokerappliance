@@ -39,6 +39,9 @@ The minimum access scope/level required to retrieve this attribute is "vpn/read-
 Aliases may form a non-circular chain, cascading one to the next.
 
 The minimum access scope/level required to retrieve this attribute is "vpn/read-only". The minimum access scope/level required to change this attribute is "global/mesh-manager". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `""`. Available since SEMP API version 2.14.
+- `allow_dmq_eligible_endpoint_override_enabled` (Boolean) Enable or disable allowing endpoints to override the DMQ Eligible flag provided by the publisher.
+
+The minimum access scope/level required to retrieve this attribute is "vpn/read-only". The minimum access scope/level required to change this attribute is "vpn/read-write". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `true`. Available since SEMP API version 2.49.
 - `authentication_basic_enabled` (Boolean) Enable or disable basic authentication for clients connecting to the Message VPN. Basic authentication is authentication that involves the use of a username and password to prove identity. If a user provides credentials for a different authentication scheme, this setting is not applicable.
 
 The minimum access scope/level required to retrieve this attribute is "vpn/read-only". The minimum access scope/level required to change this attribute is "global/mesh-manager". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `true`.
@@ -58,7 +61,7 @@ The minimum access scope/level required to retrieve this attribute is "vpn/read-
 "radius" - RADIUS authentication. A RADIUS profile name must be provided.
 "none" - No authentication. Anonymous login allowed.
 </pre>
-- `authentication_client_cert_allow_api_provided_username_enabled` (Boolean) Enable or disable allowing an incoming client connection to specify a Client Username via the API connect method. When disabled, the certificate CN (Common Name) is always used.
+- `authentication_client_cert_allow_api_provided_username_enabled` (Boolean) Enable or disable allowing an incoming client connection to specify a Client Username via the API connect method. When disabled, the system will use the configured username source settings to determine which client username will be used.
 
 The minimum access scope/level required to retrieve this attribute is "vpn/read-only". The minimum access scope/level required to change this attribute is "global/mesh-manager". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `false`.
 - `authentication_client_cert_certificate_matching_rules_enabled` (Boolean) Enable or disable certificate matching rules. When disabled, any valid certificate is accepted.
@@ -315,7 +318,7 @@ The minimum access scope/level required to retrieve this attribute is "vpn/read-
 The minimum access scope/level required to retrieve this attribute is "vpn/read-only". The minimum access scope/level required to change this attribute is "global/mesh-manager". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `true`.
 - `semp_over_msg_bus_legacy_show_clear_enabled` (Boolean) Enable or disable "legacy-show-clear" SEMP over the message bus commands (that is, SEMP show and administration requests published to the topic "#P2P/[router name]/#client/SEMP") for the current Message VPN.
 
-The minimum access scope/level required to retrieve this attribute is "vpn/read-only". The minimum access scope/level required to change this attribute is "global/mesh-manager". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `false`.
+The minimum access scope/level required to retrieve this attribute is "vpn/read-only". The minimum access scope/level required to change this attribute is "global/mesh-manager". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `false`. Available since SEMP API version 2.52.
 - `semp_over_msg_bus_show_enabled` (Boolean) Enable or disable "show" SEMP over the message bus commands for the current Message VPN.
 
 The minimum access scope/level required to retrieve this attribute is "vpn/read-only". The minimum access scope/level required to change this attribute is "global/mesh-manager". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `false`.
