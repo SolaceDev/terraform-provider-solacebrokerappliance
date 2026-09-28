@@ -12,10 +12,16 @@ on:
         default: 'v0.1.0-rc.2'
 
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Prep release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # push release branch
+      pull-requests: write # open release PRs
     steps:
       - name: Set up Go
         uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
