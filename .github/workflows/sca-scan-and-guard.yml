@@ -15,7 +15,7 @@ permissions:
 jobs:
   sca_scan:
     if: github.repository == 'SolaceProducts/terraform-provider-solacebrokerappliance'
-    uses: SolaceDev/solace-public-workflows/.github/workflows/sca-scan-and-guard.yaml@55aba02b3ed20d1ec61684f19d660425362c2cf4 # main
+    uses: SolaceDev/solace-public-workflows/.github/workflows/sca-scan-and-guard.yaml@main
     secrets:
       FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
 
